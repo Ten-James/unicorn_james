@@ -1,6 +1,6 @@
 # Welcome to unicorn_james
 > "Nevěř ostnatému drátu, byť by se stokrát tvářil jako
-stonek růží."Karel Kryl
+stonek růže." Karel Kryl
 
 James's Git
 
