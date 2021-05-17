@@ -188,9 +188,7 @@ if (isset($_GET["order"]))
         $sql = $sql." ORDER BY cost DESC";
     }
 }
- $sql = $sql."; --";
- $sql = substr_replace($sql,"",stripos($sql,"--"));
- echo $sql;
+ $sql = $sql.";";
  echo "<table><colgroup><col span=\"1\" style=\"width:30%\"><col span=\"1\" style=\"width:30%\"><col span=\"1\" style=\"width:30%\"></colgroup><thead><th>Název</th><th>Typ</th><th>Cena</th> </thead>";
  $query = mysqli_query($conn, $sql);
  $result = mysqli_num_rows($query);
