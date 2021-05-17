@@ -155,7 +155,61 @@ Základy, používaní gtts a pyaudio pro vytvoření voice assistent, práce se
 ***
 ### PHP :green_circle::green_circle::black_circle::black_circle::black_circle:
 Propojení na databazi, select dat
+```php
 
+<div class="searchcontainer">
+<input type="text" 
+<?php
+if (isset($_GET["type"]))
+{
+    echo "value =\"".$_GET["type"]."\"";
+}
+?> id="searchbar">
+<input type="button" value="Search" onclick="SearchButton('');">
+<input type="button" value="Search by cost" onclick="SearchButton('acost');">
+</div>
+<?php
+$sql = "";
+if (isset($_GET["type"]))
+{
+    $sql = "SELECT * FROM `product` WHERE type LIKE '%{$_GET["type"]}%'";
+}
+else{
+    $sql = "SELECT * FROM `product`";
+}
+if (isset($_GET["order"]))
+{
+    if ($_GET["order"] == "acost")
+    {
+        $sql = $sql." ORDER BY cost ASC";
+    }
+    else if ($_GET["order"] == "dcost")
+    {
+        $sql = $sql." ORDER BY cost DESC";
+    }
+}
+ $sql = $sql."; --";
+ $sql = substr_replace($sql,"",stripos($sql,"--"));
+ echo $sql;
+ echo "<table><colgroup><col span=\"1\" style=\"width:30%\"><col span=\"1\" style=\"width:30%\"><col span=\"1\" style=\"width:30%\"></colgroup><thead><th>Název</th><th>Typ</th><th>Cena</th> </thead>";
+ $query = mysqli_query($conn, $sql);
+ $result = mysqli_num_rows($query);
+
+if ($result > 0)
+{
+    while ($row = mysqli_fetch_assoc($query))
+    {
+        echo "<tr>";
+        echo "<td><input type=\"button\" value=\"{$row['name']}\" onclick=\"OpenEntry({$row['id']})\">"."</td>";
+        echo "<td>{$row['type']}</td>";
+        echo "<td>{$row['cost']}</td>";
+        echo "</tr>";
+    }
+}
+echo "</table>";
+echo $sql;
+?>
+```
 ***
 ### MySQL :green_circle::green_circle::green_circle::black_circle::black_circle:
 Práce z databází. Základní logistika, Uprava Velkého počtu dat kvůli špatnému rozvržení databáze.
