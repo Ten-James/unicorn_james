@@ -1,0 +1,58 @@
+$c_p0: var(--primary-color-red-0);
+$c_p1: var(--primary-color-red-1);
+$c_p2: var(--primary-color-red-2);
+$c_p3: var(--primary-color-red-3);
+$c_p4: var(--primary-color-red-4);
+
+$c_n: var(--neutral-color);
+$c_n0: var(--neutral-color-0);
+$c_n1: var(--neutral-color-1);
+$c_n2: var(--neutral-color-2);
+$c_n3: var(--neutral-color-3);
+$c_n4: var(--neutral-color-4);
+
+
+$c_b1: var(--secondary-color-blue-1);
+$c_b2: var(--secondary-color-blue-2);
+$c_b3: var(--secondary-color-blue-3);
+$c_b4: var(--secondary-color-blue-4);
+
+
+$c_w: var(--white-color);
+$c_w0: var(--white-color-0);
+$c_w1: var(--white-color-1);
+$c_w2: var(--white-color-2);
+$c_w3: var(--white-color-3);
+$c_w4: var(--white-color-4);
+
+
+:root{
+    --primary-color-red-0: hsl(280, 96%, 80%);
+    --primary-color-red-1: hsl(280, 97%, 64%);
+    --primary-color-red-2: hsl(280, 97%, 48%);
+    --primary-color-red-3: hsl(280, 97%, 32%);
+    --primary-color-red-4: hsl(280, 97%, 16%);
+
+    
+    --neutral-color:   hsl(210, 17%, 96%);
+    --neutral-color-0: hsl(210, 17%, 80%);
+    --neutral-color-1: hsl(210, 17%, 64%);
+    --neutral-color-2: hsl(210, 17%, 48%);
+    --neutral-color-3: hsl(210, 17%, 32%);
+    --neutral-color-4: hsl(210, 17%, 16%);
+
+
+    --white-color:   hsl(0, 0%, 100%);
+    --white-color-0: hsl(0, 0%, 80%);
+    --white-color-1: hsl(0, 0%, 64%);
+    --white-color-2: hsl(0, 0%, 48%);
+    --white-color-3: hsl(0, 0%, 32%);
+    --white-color-4: hsl(0, 0%, 16%);
+
+    
+    --secondary-color-blue-0: hsl(188, 39%, 80%);
+    --secondary-color-blue-1: hsl(188, 39%, 64%);
+    --secondary-color-blue-2: hsl(188, 39%, 48%);
+    --secondary-color-blue-3: hsl(188, 39%, 32%);
+    --secondary-color-blue-4: hsl(188, 39%, 16%);
+}

@@ -1,15 +1,63 @@
-.App{
-    background-color: #222;
+@import 'adds/colors';
+
+.App {
     text-align: center;
-    color: #fff;
+    background-color: $c_w;
+    color: $c_p2;
     width: 100vw;
     height: 100vh;
     position: absolute;
 }
 
 .header {
-    background-color: #444;
+    background-color: $c_n0;
+    box-shadow: 0px 0px 0.5em $c_w1;
     padding: 0 10%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+
+    h1{
+        font-size: 3rem;
+    }
+}
+
+nav ul{
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    padding: 0;
+    margin: 0;
+    gap: 2em;
+}
+
+nav a{
+    font-size: 1em;
+    color: $c_b3;
+    text-decoration: none;
+    transition: all 200ms ease-in-out;
+
+    &:visited{
+        color: $c_b3;
+    }
+
+    &:hover{
+        font-size: 1.2em;
+        &::after{
+            width: 100%;
+
+        }
+    }
+
+    &::after{
+        display: block;
+        content: "";
+        background-color: $c_b3;
+        width: 0%;
+        margin: 0 auto;
+        transition: all 200ms ease-in-out;
+        height: 1px;
+    }
 }
