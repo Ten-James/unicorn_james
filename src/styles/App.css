@@ -494,9 +494,9 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  position: relative;
   -webkit-transform: translateY(3.9em);
           transform: translateY(3.9em);
   width: 90%;
