@@ -5,6 +5,7 @@ import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 import Products from "./componens/Products";
+import MainPage from "./componens/MainPage";
 import Contact from "./componens/Contact";
 import About from "./componens/About";
 import CartItem from "./componens/CartItem";
@@ -12,6 +13,7 @@ import CartItem from "./componens/CartItem";
 import items from "./source.js";
 
 function App() {
+  const [SlectedPage, setSlectedPage] = useState('main')
   const [Cart, setCart] = useState(false);
 
   const [AllItems, setAllItems] = useState(items);
@@ -27,23 +29,23 @@ function App() {
     <Router>
       <div className="App">
         <nav className="header">
-          <Link to="/">
+          <Link to="#" onClick={() => setSlectedPage('main')}>
             <h1>SPACE SHOP</h1>
           </Link>
           <div className="nav-rightside">
             <ul>
               <li>
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="#" onClick={() => setSlectedPage('products')}>
                   Products
                 </Link>
               </li>
               <li>
-                <Link className="nav-link" to="/about">
+                <Link className="nav-link" to="#" onClick={() => setSlectedPage('about')}>
                   About
                 </Link>
               </li>
               <li>
-                <Link className="nav-link" to="/contact">
+                <Link className="nav-link" to="#" onClick={() => setSlectedPage('contact')}>
                   Contact
                 </Link>
               </li>
@@ -91,17 +93,21 @@ function App() {
             </div>
           </div>
         </nav>
-        <Switch>
-          <Route path="/about">
+        <CSSTransition in={SlectedPage==='main'} unmountOnExit timeout={500} classNames="ani-mainpage">
+            <MainPage  setpage={setSlectedPage}/>
+        </CSSTransition>
+        <CSSTransition in={SlectedPage==='about'} unmountOnExit timeout={700} classNames="ani-secpage">
             <About></About>
-          </Route>
-          <Route path="/contact">
+        </CSSTransition>
+        <CSSTransition in={SlectedPage==='contact'} unmountOnExit timeout={700} classNames="ani-secpage">
             <Contact></Contact>
-          </Route>
-          <Route path="/">
+        </CSSTransition>
+        <CSSTransition in={SlectedPage==='products'} unmountOnExit timeout={700} classNames="ani-secpage">
             <Products prods={AllItems}></Products>
-          </Route>
-        </Switch>
+        </CSSTransition>
+        <CSSTransition in={SlectedPage==='admin'} unmountOnExit timeout={700} classNames="ani-secpage">
+            <Products prods={AllItems}></Products>
+        </CSSTransition>
       </div>
     </Router>
   );
