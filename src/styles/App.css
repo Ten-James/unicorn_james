@@ -497,7 +497,7 @@ body {
   position: relative;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  margin-top: 11rem;
+  margin-top: 21vh;
   width: 90%;
   list-style: none;
 }
