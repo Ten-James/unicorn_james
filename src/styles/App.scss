@@ -188,3 +188,31 @@
     cursor: pointer;
   }
 }
+
+
+.prod-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+  .prod-item{
+    background-color: $c_n4;
+    border-radius: 1em;
+    padding: 1em;
+    color: $c_w1;
+    margin: 1em;
+    aspect-ratio: 2 / 3;
+    flex: 0 1 auto;
+    .img{
+      aspect-ratio: 1 / 1;
+      background-color: $c_p2;
+      margin: 1em;
+      border-radius: 50%;
+    }
+
+    .prod-desc{
+      width: 15em;
+    }
+  }
+}

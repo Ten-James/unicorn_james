@@ -99,7 +99,7 @@ function App() {
             <Contact></Contact>
           </Route>
           <Route path="/">
-            <Products></Products>
+            <Products prods={AllItems}></Products>
           </Route>
         </Switch>
       </div>

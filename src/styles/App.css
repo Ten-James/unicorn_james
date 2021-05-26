@@ -263,4 +263,38 @@
   background-color: var(--neutral-color-0);
   cursor: pointer;
 }
+
+.prod-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.prod-grid .prod-item {
+  background-color: var(--neutral-color-4);
+  border-radius: 1em;
+  padding: 1em;
+  color: var(--white-color-1);
+  margin: 1em;
+  aspect-ratio: 2 / 3;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+}
+
+.prod-grid .prod-item .img {
+  aspect-ratio: 1 / 1;
+  background-color: var(--primary-color-red-2);
+  margin: 1em;
+  border-radius: 50%;
+}
+
+.prod-grid .prod-item .prod-desc {
+  width: 15em;
+}
 /*# sourceMappingURL=App.css.map */
