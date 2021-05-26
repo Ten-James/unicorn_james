@@ -267,15 +267,19 @@ body {
 }
 
 .prod-grid .prod-item {
+  position: relative;
   background-color: var(--platinum1);
   border-radius: 1em;
   border: solid 0.1em var(--terra-cotta);
-  padding: 1em;
+  padding: 1em 1em 0 1em;
+  width: 15em;
   color: var(--terra-cotta);
   margin: 1em;
   -webkit-box-shadow: 0px 2px 0.5em var(--cadet-blue);
           box-shadow: 0px 2px 0.5em var(--cadet-blue);
   aspect-ratio: 2 / 3;
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
@@ -310,10 +314,69 @@ body {
 }
 
 .prod-grid .prod-item .prod-desc {
-  width: 15em;
+  width: 12em;
+  margin: 0 auto;
   font-weight: normal;
   font-style: oblique;
   color: #eeaaa0;
+}
+
+.prod-grid .prod-item .split {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 3em;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.prod-grid .prod-item .split h3 {
+  font-size: 2em;
+  color: var(--catawba);
+}
+
+.prod-grid .prod-item .split h3 .hint {
+  display: block;
+  position: absolute;
+  font-size: 0.5em;
+  font-weight: normal;
+  font-style: italic;
+  color: var(--cadet-blue);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.prod-grid .prod-item .split button {
+  position: absolute;
+  font-size: 1.5em;
+  background-color: var(--cadet-blue1);
+  padding: 0.5em;
+  border: none;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.75em;
+  -webkit-transform: translate(-0.5em, -0.5em);
+          transform: translate(-0.5em, -0.5em);
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+  cursor: pointer;
+  color: var(--catawba);
+}
+
+.prod-grid .prod-item .split button:hover {
+  -webkit-filter: brightness(0.8);
+          filter: brightness(0.8);
+}
+
+.prod-grid .prod-item:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+  -webkit-filter: brightness(1.1);
+          filter: brightness(1.1);
 }
 
 .ani-mainpage-enter {
@@ -350,7 +413,8 @@ body {
           box-shadow: 0px 0px 0.5em var(--cadet-blue);
 }
 
-.ani-secpage-enter, .ani-secpage-enter-active {
+.ani-secpage-enter,
+.ani-secpage-enter-active {
   -webkit-transform: translateY(-250%);
           transform: translateY(-250%);
 }
