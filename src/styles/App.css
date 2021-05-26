@@ -494,12 +494,15 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
+  position: absolute;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  margin-top: 21vh;
   width: 90%;
   list-style: none;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, -3rem);
+          transform: translate(-50%, -3rem);
 }
 
 .mainpage div ul li {

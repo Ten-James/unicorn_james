@@ -367,12 +367,14 @@ body {
     }
     ul {
       display: flex;
-      position: relative;
+      position: absolute;
       justify-content: space-around;
       // transform: translateY(3.9em);
-      margin-top: 21vh;
       width: 90%;
       list-style: none;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%,-3rem);
 
       li {
         position: relative;
