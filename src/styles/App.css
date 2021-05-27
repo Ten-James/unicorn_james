@@ -817,4 +817,32 @@ body {
   margin: 0.2em;
   cursor: default;
 }
+
+.conc {
+  padding: 1em;
+  font-size: 2em;
+  background-color: var(--platinum);
+  width: 90%;
+  margin: 0 auto;
+  border: solid 0.1em var(--terra-cotta);
+  -webkit-box-shadow: 0px 2px 0.5em var(--cadet-blue), 0px 2px 0.5em var(--cadet-blue) inset;
+          box-shadow: 0px 2px 0.5em var(--cadet-blue), 0px 2px 0.5em var(--cadet-blue) inset;
+}
+
+.conc .table-line {
+  width: 40%;
+  margin: 0.5em auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.conc .table-line p:nth-child(1) {
+  font-weight: bold;
+  color: var(--terra-cotta);
+  font-style: italic;
+}
 /*# sourceMappingURL=App.css.map */

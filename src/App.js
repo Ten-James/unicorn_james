@@ -47,23 +47,10 @@ function App() {
 
     setCartItems(response.cart);
   };
-
-  const handleRemoveFromCart = async (lineItemId) => {
-    const response = await commerce.cart.remove(lineItemId);
-
-    setCartItems(response.cart);
-  };
-
   const handleEmptyCart = async () => {
     const response = await commerce.cart.empty();
 
     setCartItems(response.cart);
-  };
-
-  const refreshCart = async () => {
-    const newCart = await commerce.cart.refresh();
-
-    setCartItems(newCart);
   };
 
   useEffect(() => {

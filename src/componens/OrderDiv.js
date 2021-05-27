@@ -1,7 +1,6 @@
 import { React, useState, useRef } from "react";
 import CartItem from "./CartItem";
 import $ from "jquery";
-import commerce from "../source";
 
 export default function OrderDiv(props) {
   const [shipping, setShipping] = useState(false);
@@ -29,6 +28,7 @@ export default function OrderDiv(props) {
   const SendOrderToServer = () => {
     var order = {
       id: props.cart.id,
+      shipingtype: shiptype,
       items: props.cart.line_items,
       totalcost: props.cart.subtotal,
       userinfo: {

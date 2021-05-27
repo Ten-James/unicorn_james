@@ -637,3 +637,27 @@ body {
     }
   }
 }
+
+
+.conc{
+  padding: 1em;
+  font-size: 2em;
+  background-color: $c_plat;
+  width: 90%;
+  margin: 0 auto;
+  border: solid 0.1em $c_tera;
+  box-shadow: 0px 2px 0.5em $c_blue, 0px 2px 0.5em $c_blue inset;
+
+  .table-line{
+    width: 40%;
+    margin: 0.5em auto;
+    display: flex;
+    justify-content: space-between;
+
+    p:nth-child(1){
+      font-weight: bold;
+      color: $c_tera;
+      font-style: italic;
+    }
+  }
+}

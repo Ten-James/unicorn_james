@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <div className="ani-secpage">
       <h1>Our Contact</h1>
-      <div className="split">
+      <div className="conc">
         <div>
           <h2>James Indrák</h2>
           <div className="table-line">
@@ -19,9 +19,8 @@ export default function Contact() {
             <p>Tel:</p>
             <p>604 969 426</p>
           </div>
-        </div>
-        <div>
-          img
+          <p>Dont be scared and contant me</p>
+          <p>Im always here</p>
         </div>
       </div>
     </div>
