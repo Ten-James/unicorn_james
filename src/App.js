@@ -1,7 +1,7 @@
 import "./styles/App.css";
 
 import { React, useState, useEffect } from "react";
-import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
 import Products from "./componens/Products";
@@ -125,7 +125,8 @@ function App() {
                 >
                   <div className="cart-display">
                     <h2>
-                      Your Cart <div className="hint">Click to remove</div>
+                      Your Cart{" "}
+                      <div className="hint">Click for Preview -not working</div>
                     </h2>
                     <div>
                       {CartItems.line_items?.length === 0 ? (
@@ -135,7 +136,7 @@ function App() {
                           <CartItem
                             key={x.id}
                             item={x}
-                            onClick={() => handleRemoveFromCart(x.id)}
+                            onClick={handleUpdateCartQty}
                           />
                         ))
                       )}
@@ -186,7 +187,15 @@ function App() {
         >
           <Products prods={AllItems} onclick={handleAddToCart}></Products>
         </CSSTransition>
-        {Order ? <OrderDiv exitclick={() => setOrder(false)} /> : <></>}
+        {Order ? (
+          <OrderDiv
+            cart={CartItems}
+            handleUpdateCartQty={handleUpdateCartQty}
+            exitclick={() => setOrder(false)}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </Router>
   );
