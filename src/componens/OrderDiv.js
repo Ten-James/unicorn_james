@@ -1,5 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 import CartItem from "./CartItem";
+import $ from "jquery";
+import commerce from "../source";
 
 export default function OrderDiv(props) {
   const [shipping, setShipping] = useState(false);
@@ -11,61 +13,118 @@ export default function OrderDiv(props) {
     { type: "warehouse", icon: "fas fa-warehouse", name: "Our Warehouse" },
   ];
 
-  function rendershipping() {
-    if (shipping === false)
-      return (
-        <div className="form split">
-          <div>
-            <p>First Name</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Second Name</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Telephone</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Address</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>City</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Country</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>PostCode</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Planet</p>
-            <input type="text" />
-          </div>
-          <div className="email">
-            <p>E-mail</p>
-            <input type="text" />
-          </div>
+  const FirstNameref = useRef("");
+  const SecondNameref = useRef("");
+  const Telephoneref = useRef("");
+  const Addressref = useRef("");
+  const Cityref = useRef("");
+  const Countyref = useRef("");
+  const PostCoderef = useRef("");
+  const Planetref = useRef("");
+  const Emailref = useRef("");
+  const CardNumberref = useRef("");
+  const Expeditionref = useRef("");
+  const CCVref = useRef("");
+
+  const SendOrderToServer = () => {
+    var order = {
+      id: props.cart.id,
+      items: props.cart.line_items,
+      totalcost: props.cart.subtotal,
+      userinfo: {
+        first_name: FirstNameref.current.value,
+        last_name: SecondNameref.current.value,
+        telephone: Telephoneref.current.value,
+        address: Addressref.current.value,
+        city: Cityref.current.value,
+        country: Countyref.current.value,
+        postcode: PostCoderef.current.value,
+        planet: Planetref.current.value,
+        email: Emailref.current.value,
+      },
+      cardinfo: {
+        number: CardNumberref.current.value,
+        exp: Expeditionref.current.value,
+        ccv: CCVref.current.value,
+      },
+    };
+    console.log(order);
+  };
+  function trytogoshipping() {
+    if (
+      FirstNameref.current.value !== "" &&
+      SecondNameref.current.value !== "" &&
+      Telephoneref.current.value !== "" &&
+      Addressref.current.value !== "" &&
+      Cityref.current.value !== "" &&
+      Countyref.current.value !== "" &&
+      PostCoderef.current.value !== "" &&
+      Planetref.current.value !== "" &&
+      Emailref.current.value !== ""
+    ) {
+      $(".firstform").css("display", "none");
+      $(".secform").css("display", "grid");
+      return setShipping(true);
+    }
+    $("input").each((i, e) => {
+      if (e.value === "") e.style.border = "solid 1px var(--terra-cotta)";
+      else e.style.border = "solid 1px var(--cadet-blue)";
+    });
+    return;
+  }
+
+  const rendershipping = () => (
+    <>
+      <div className="firstform form split">
+        <div>
+          <p>First Name</p>
+          <input type="text" ref={FirstNameref} />
         </div>
-      );
-    return (
-      <div className="form split-payment">
+        <div>
+          <p>Last Name</p>
+          <input type="text" ref={SecondNameref} />
+        </div>
+        <div>
+          <p>Telephone</p>
+          <input type="text" ref={Telephoneref} />
+        </div>
+        <div>
+          <p>Address</p>
+          <input type="text" ref={Addressref} />
+        </div>
+        <div>
+          <p>City</p>
+          <input type="text" ref={Cityref} />
+        </div>
+        <div>
+          <p>Country</p>
+          <input type="text" ref={Countyref} />
+        </div>
+        <div>
+          <p>PostCode</p>
+          <input type="text" ref={PostCoderef} />
+        </div>
+        <div>
+          <p>Planet</p>
+          <input type="text" value="Earth" ref={Planetref} />
+        </div>
+        <div className="email">
+          <p>E-mail</p>
+          <input type="text" ref={Emailref} />
+        </div>
+      </div>
+      <div className="secform form split-payment" style={{ display: "none" }}>
         <div className="card-number">
           <p>Card Number</p>
-          <input type="text" />
+          <input type="text" ref={CardNumberref} />
         </div>
         <div className="card-exp">
           <p>Expiration Time</p>
-          <input type="text" />
+          <input type="text" ref={Expeditionref} />
         </div>
         <div>
           <p>CCV</p>
-          <input type="text" />
+          <input type="text" ref={CCVref} />
         </div>
         {shipp.map((x) => {
           if (x.type === shiptype)
@@ -83,8 +142,8 @@ export default function OrderDiv(props) {
           );
         })}
       </div>
-    );
-  }
+    </>
+  );
 
   return (
     <div className="order-main">
@@ -117,11 +176,13 @@ export default function OrderDiv(props) {
           </div>
         </div>
         {!shipping ? (
-          <button className="paymentbutton" onClick={() => setShipping(true)}>
+          <button className="paymentbutton" onClick={trytogoshipping}>
             Go to Payment Options
           </button>
         ) : (
-          <></>
+          <button className="paymentbutton" onClick={() => SendOrderToServer()}>
+            Checkout
+          </button>
         )}
       </div>
     </div>
