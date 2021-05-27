@@ -136,7 +136,7 @@ body {
   padding: 1em;
   border-radius: 1em;
   border: solid 0.1em $c_tera;
-  background-color: $c_plat;
+  background: linear-gradient($c_plat, $c_plat1);
   transition: all 200ms ease-in-out;
 
   h2 .hint {
@@ -164,6 +164,23 @@ body {
       left: 0;
       top: 50%;
       transform: translateY(-50%);
+    }
+  }
+  button {
+    position: relative;
+    font-size: 1.5em;
+    border: solid 0.05em $c_tera;
+    background-color: $c_blue1;
+    padding: 0.25em;
+    margin: 0.2em 0.4em;
+    border-radius: 0.5em;
+    transition: all 500ms ease-in-out;
+    cursor: pointer;
+    color: $c_cata;
+    font-family: 'Odibee Sans', cursive;
+    &:hover{
+      filter: brightness(0.8);
+
     }
   }
 }
@@ -259,15 +276,16 @@ body {
 
       button {
         position: absolute;
+        border: solid 0.05em $c_tera;
         font-size: 1.5em;
         background-color: $c_blue1;
         padding: 0.5em;
-        border: none;
         right: 0;
         bottom: 0;
         border-radius: 0.75em;
         transform: translate(-0.5em,-0.5em);
         transition: all 500ms ease-in-out;
+        font-family: 'Odibee Sans', cursive;
         cursor: pointer;
         color: $c_cata;
         &:hover{

@@ -183,7 +183,8 @@ body {
   padding: 1em;
   border-radius: 1em;
   border: solid 0.1em var(--terra-cotta);
-  background-color: var(--platinum);
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--platinum)), to(var(--platinum1)));
+  background: linear-gradient(var(--platinum), var(--platinum1));
   -webkit-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
 }
@@ -219,6 +220,26 @@ body {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+}
+
+.cart-display button {
+  position: relative;
+  font-size: 1.5em;
+  border: solid 0.05em var(--terra-cotta);
+  background-color: var(--cadet-blue1);
+  padding: 0.25em;
+  margin: 0.2em 0.4em;
+  border-radius: 0.5em;
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+  cursor: pointer;
+  color: var(--catawba);
+  font-family: 'Odibee Sans', cursive;
+}
+
+.cart-display button:hover {
+  -webkit-filter: brightness(0.8);
+          filter: brightness(0.8);
 }
 
 .cart-item {
@@ -352,10 +373,10 @@ body {
 
 .prod-grid .prod-item .split button {
   position: absolute;
+  border: solid 0.05em var(--terra-cotta);
   font-size: 1.5em;
   background-color: var(--cadet-blue1);
   padding: 0.5em;
-  border: none;
   right: 0;
   bottom: 0;
   border-radius: 0.75em;
@@ -363,6 +384,7 @@ body {
           transform: translate(-0.5em, -0.5em);
   -webkit-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out;
+  font-family: 'Odibee Sans', cursive;
   cursor: pointer;
   color: var(--catawba);
 }

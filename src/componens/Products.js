@@ -7,7 +7,7 @@ export default function Products(props) {
       <h1>Our Products</h1>
       <div className="prod-grid">
         {props.prods.map((x) => (
-          <ProductDiv item={x} />
+          <ProductDiv item={x} onclick={() => props.onclick(x)} />
         ))}
       </div>
     </div>

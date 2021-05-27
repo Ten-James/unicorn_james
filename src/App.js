@@ -13,7 +13,7 @@ import CartItem from "./componens/CartItem";
 import items from "./source.js";
 
 function App() {
-  const [SlectedPage, setSlectedPage] = useState('main')
+  const [SlectedPage, setSlectedPage] = useState("main");
   const [Cart, setCart] = useState(false);
 
   const [AllItems, setAllItems] = useState(items);
@@ -21,31 +21,68 @@ function App() {
 
   function removeItem(item, get, set) {
     var items = [...get];
-    items = items.filter((x) => x !== item);
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id !== item.id) continue;
+      if (items[i].count > 1) {
+        items[i].count--;
+        set(items);
+        return;
+      }
+    }
+    items = items.filter((x) => x.id !== item.id);
     set(items);
+  }
+
+  function addItem(item, get, set) {
+    var items = [...get];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id !== item.id) continue;
+      items[i].count++;
+      set(items);
+      return;
+    }
+    item.count = 1; // wtf it was a reference?
+    var newitems = [...get, item];
+    set(newitems);
+  }
+
+  function addCart(item) {
+    addItem(item, CartItems, setCartItems);
   }
 
   return (
     <Router>
       <div className="App">
         <nav className="header">
-          <Link to="#" onClick={() => setSlectedPage('main')}>
+          <Link to="#" onClick={() => setSlectedPage("main")}>
             <h1>SPACE SHOP</h1>
           </Link>
           <div className="nav-rightside">
             <ul>
               <li>
-                <Link className="nav-link" to="#" onClick={() => setSlectedPage('products')}>
+                <Link
+                  className="nav-link"
+                  to="#"
+                  onClick={() => setSlectedPage("products")}
+                >
                   Products
                 </Link>
               </li>
               <li>
-                <Link className="nav-link" to="#" onClick={() => setSlectedPage('about')}>
+                <Link
+                  className="nav-link"
+                  to="#"
+                  onClick={() => setSlectedPage("about")}
+                >
                   About
                 </Link>
               </li>
               <li>
-                <Link className="nav-link" to="#" onClick={() => setSlectedPage('contact')}>
+                <Link
+                  className="nav-link"
+                  to="#"
+                  onClick={() => setSlectedPage("contact")}
+                >
                   Contact
                 </Link>
               </li>
@@ -82,9 +119,9 @@ function App() {
                     <div>
                       <h3>
                         <div className="hint">Cost</div>
-                        {CartItems.reduce((a, b) => a + b.cost, 0)}
+                        {CartItems.reduce((a, b) => a + b.cost * b.count, 0)}
                       </h3>
-                      <button>Clear</button>
+                      <button onClick={() => setCartItems([])}>Clear</button>
                       <button>Order</button>
                     </div>
                   </div>
@@ -93,20 +130,45 @@ function App() {
             </div>
           </div>
         </nav>
-        <CSSTransition in={SlectedPage==='main'} unmountOnExit timeout={500} classNames="ani-mainpage">
-            <MainPage  setpage={setSlectedPage}/>
+        <CSSTransition
+          in={SlectedPage === "main"}
+          unmountOnExit
+          timeout={500}
+          classNames="ani-mainpage"
+        >
+          <MainPage setpage={setSlectedPage} />
         </CSSTransition>
-        <CSSTransition in={SlectedPage==='about'} unmountOnExit timeout={700} classNames="ani-secpage">
-            <About></About>
+        <CSSTransition
+          in={SlectedPage === "about"}
+          unmountOnExit
+          timeout={700}
+          classNames="ani-secpage"
+        >
+          <About></About>
         </CSSTransition>
-        <CSSTransition in={SlectedPage==='contact'} unmountOnExit timeout={700} classNames="ani-secpage">
-            <Contact></Contact>
+        <CSSTransition
+          in={SlectedPage === "contact"}
+          unmountOnExit
+          timeout={700}
+          classNames="ani-secpage"
+        >
+          <Contact></Contact>
         </CSSTransition>
-        <CSSTransition in={SlectedPage==='products'} unmountOnExit timeout={700} classNames="ani-secpage">
-            <Products prods={AllItems}></Products>
+        <CSSTransition
+          in={SlectedPage === "products"}
+          unmountOnExit
+          timeout={700}
+          classNames="ani-secpage"
+        >
+          <Products prods={AllItems} onclick={addCart}></Products>
         </CSSTransition>
-        <CSSTransition in={SlectedPage==='admin'} unmountOnExit timeout={700} classNames="ani-secpage">
-            <Products prods={AllItems}></Products>
+        <CSSTransition
+          in={SlectedPage === "admin"}
+          unmountOnExit
+          timeout={700}
+          classNames="ani-secpage"
+        >
+          <Products prods={AllItems}></Products>
         </CSSTransition>
       </div>
     </Router>

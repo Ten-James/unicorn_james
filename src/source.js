@@ -5,6 +5,7 @@ const items = [
     desc: "An special motor designed for flights with small distance.",
     cost: 1500,
     img: "",
+    count: 1,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const items = [
     desc: "Motor Mark II is designed for more distant routes.",
     cost: 3500,
     img: "",
+    count: 1000,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const items = [
     desc: "Can handle basic operation, have 32gB memory.",
     cost: 3000,
     img: "",
+    count: 1,
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ const items = [
     desc: "Upgraded version of Electric circut, now it runs on 128bit.",
     cost: 9000,
     img: "",
+    count: 1,
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ const items = [
     desc: "Max speed is around 0.05c, carry weight about 2 tonne.",
     cost: 10000,
     img: "",
+    count: 1,
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ const items = [
     desc: "Max speed is around 0.2c, carry weight about 10 tonne.",
     cost: 20000,
     img: "",
+    count: 1,
   },
   {
     id: 7,
@@ -47,6 +53,7 @@ const items = [
     desc: "Max speed is around 0.3c, carry weight about 15 tonne.",
     cost: 30000,
     img: "",
+    count: 1,
   },
   {
     id: 8,
@@ -54,6 +61,7 @@ const items = [
     desc: "You need to have it to build your own rocket.",
     cost: 50000,
     img: "",
+    count: 1,
   },
   {
     id: 9,
@@ -61,6 +69,7 @@ const items = [
     desc: "Designed for better flight experience.",
     cost: 75000,
     img: "",
+    count: 1,
   },
   {
     id: 10,
@@ -68,6 +77,7 @@ const items = [
     desc: "Makes your rocket way too big.",
     cost: 100000,
     img: "",
+    count: 1,
   },
   //   { id: 11, name: "", desc: "", cost: 0, img: "" },
   //   { id: 12, name: "", desc: "", cost: 0, img: "" },
