@@ -7,11 +7,14 @@ export default function ProductDiv(props) {
       <div className="img">
         <div>IMG</div>
       </div>
-      <p className="prod-desc">{props.item.desc}</p>
+      <p
+        className="prod-desc"
+        dangerouslySetInnerHTML={{ __html: props.item.description }}
+      />
       <div className="split">
         <h3>
           <div className="hint">Cost:</div>
-          {props.item.cost}
+          {props.item.price.formatted_with_symbol}
         </h3>
         <button onClick={props.onclick}>
           BUY <i className="fas fa-shopping-basket" />

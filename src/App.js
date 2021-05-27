@@ -1,6 +1,6 @@
 import "./styles/App.css";
 
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
@@ -9,46 +9,67 @@ import MainPage from "./componens/MainPage";
 import Contact from "./componens/Contact";
 import About from "./componens/About";
 import CartItem from "./componens/CartItem";
+import OrderDiv from "./componens/OrderDiv";
 
-import items from "./source.js";
+import commerce from "./source.js";
 
 function App() {
   const [SlectedPage, setSlectedPage] = useState("main");
-  const [Cart, setCart] = useState(false);
+  const [CartDisplay, setCartDisplay] = useState(false);
+  const [Order, setOrder] = useState(false);
 
-  const [AllItems, setAllItems] = useState(items);
-  const [CartItems, setCartItems] = useState(items);
+  const [AllItems, setAllItems] = useState([]);
+  const [CartItems, setCartItems] = useState([]);
 
-  function removeItem(item, get, set) {
-    var items = [...get];
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].id !== item.id) continue;
-      if (items[i].count > 1) {
-        items[i].count--;
-        set(items);
-        return;
-      }
-    }
-    items = items.filter((x) => x.id !== item.id);
-    set(items);
+  function order() {
+    setCartDisplay(false);
+    setOrder(true);
   }
 
-  function addItem(item, get, set) {
-    var items = [...get];
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].id !== item.id) continue;
-      items[i].count++;
-      set(items);
-      return;
-    }
-    item.count = 1; // wtf it was a reference?
-    var newitems = [...get, item];
-    set(newitems);
-  }
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list();
 
-  function addCart(item) {
-    addItem(item, CartItems, setCartItems);
-  }
+    setAllItems(data);
+  };
+
+  const fetchCart = async () => {
+    setCartItems(await commerce.cart.retrieve());
+  };
+
+  const handleAddToCart = async (productId, quantity) => {
+    const item = await commerce.cart.add(productId, quantity);
+
+    setCartItems(item.cart);
+  };
+
+  const handleUpdateCartQty = async (lineItemId, quantity) => {
+    const response = await commerce.cart.update(lineItemId, { quantity });
+
+    setCartItems(response.cart);
+  };
+
+  const handleRemoveFromCart = async (lineItemId) => {
+    const response = await commerce.cart.remove(lineItemId);
+
+    setCartItems(response.cart);
+  };
+
+  const handleEmptyCart = async () => {
+    const response = await commerce.cart.empty();
+
+    setCartItems(response.cart);
+  };
+
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+
+    setCartItems(newCart);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    fetchCart();
+  }, []);
 
   return (
     <Router>
@@ -88,12 +109,16 @@ function App() {
               </li>
             </ul>
             <div>
-              <Link to="#" className="nav-cart" onClick={() => setCart(!Cart)}>
+              <Link
+                to="#"
+                className="nav-cart"
+                onClick={() => setCartDisplay(!CartDisplay)}
+              >
                 <i className="fas fa-shopping-cart" />
               </Link>
               <div className="cart-parrent">
                 <CSSTransition
-                  in={Cart === true}
+                  in={CartDisplay === true}
                   unmountOnExit
                   timeout={200}
                   classNames="cart-ani"
@@ -103,26 +128,25 @@ function App() {
                       Your Cart <div className="hint">Click to remove</div>
                     </h2>
                     <div>
-                      {CartItems.map((x) => (
-                        <CartItem
-                          key={x.id}
-                          item={x}
-                          onClick={() => removeItem(x, CartItems, setCartItems)}
-                        />
-                      ))}
-                      {CartItems.length === 0 ? (
+                      {CartItems.line_items?.length === 0 ? (
                         <div>No Items in Cart</div>
                       ) : (
-                        <></>
+                        CartItems.line_items?.map((x) => (
+                          <CartItem
+                            key={x.id}
+                            item={x}
+                            onClick={() => handleRemoveFromCart(x.id)}
+                          />
+                        ))
                       )}
                     </div>
                     <div>
                       <h3>
                         <div className="hint">Cost</div>
-                        {CartItems.reduce((a, b) => a + b.cost * b.count, 0)}
+                        {CartItems.subtotal?.formatted_with_symbol}
                       </h3>
-                      <button onClick={() => setCartItems([])}>Clear</button>
-                      <button>Order</button>
+                      <button onClick={handleEmptyCart}>Clear</button>
+                      <button onClick={order}>Order</button>
                     </div>
                   </div>
                 </CSSTransition>
@@ -160,16 +184,9 @@ function App() {
           timeout={700}
           classNames="ani-secpage"
         >
-          <Products prods={AllItems} onclick={addCart}></Products>
+          <Products prods={AllItems} onclick={handleAddToCart}></Products>
         </CSSTransition>
-        <CSSTransition
-          in={SlectedPage === "admin"}
-          unmountOnExit
-          timeout={700}
-          classNames="ani-secpage"
-        >
-          <Products prods={AllItems}></Products>
-        </CSSTransition>
+        {Order ? <OrderDiv exitclick={() => setOrder(false)} /> : <></>}
       </div>
     </Router>
   );
