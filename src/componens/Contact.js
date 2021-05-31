@@ -23,6 +23,12 @@ export default function Contact() {
           <p>Im always here</p>
         </div>
       </div>
+      <div className="conc">
+          <h2>Odkazy</h2>
+          <div>
+            <a href="https://github.com/Ten-James">Github</a>
+          </div>
+      </div>
     </div>
   );
 }
